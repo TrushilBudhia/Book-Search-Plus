@@ -8,7 +8,7 @@ import { SAVE_BOOK } from '../utils/mutations';
 
 const SearchBooks = () => {
   // Adding code to set up mutation
-  const [saveBook] = useMutation(SAVE_BOOK);
+  const [saveBook, { error }] = useMutation(SAVE_BOOK);
   // Create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
   // Create state for holding our search field data
@@ -34,7 +34,7 @@ const SearchBooks = () => {
       const response = await searchGoogleBooks(searchInput);
 
       if (!response.ok) {
-        throw new Error('something went wrong!');
+        throw new Error('Something went wrong!');
       }
 
       const { items } = await response.json();
@@ -70,15 +70,19 @@ const SearchBooks = () => {
       const response = await saveBook(bookToSave, token);
 
       if (!response.ok) {
-        throw new Error('something went wrong!');
+        throw new Error('Something went wrong!');
       }
-      // Adding code to execute asynchronous mutation function returned by `useMutation()` hook and pass in `formState` object
+      // Adding code to execute asynchronous mutation function returned by `useMutation()` hook and pass in `variables` object
       const {data} = await saveBook({ 
         variables: {
-          input: { ...bookToSave }
+          input: bookToSave
         }
       });
       console.log('data', data)
+
+      if (error) {
+        throw new Error('Something went wrong!');
+      }
       // If book successfully saves to user's account, save book id to state
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
     } catch (err) {
