@@ -8,7 +8,7 @@ const resolvers = {
   Query: {
     me: async (parent, args, context) => {
       if (context.user) {
-        return User.findOne({ _id: context.user._id });
+        return User.findOne({ _id: context.user._id }).populate(savedBooks);
       }
       throw new AuthenticationError('Cannot find a user with this id!');
     },
@@ -48,7 +48,9 @@ const resolvers = {
           const updatedUserProfile = await User.findOneAndUpdate(
             { _id: context.user._id },
             {
-              $addToSet: { bookId, authors, description, title, image, link }
+              $addToSet: {
+                savedBooks: { bookId, authors, description, title, image, link }
+              }
             },
             { new: true, runValidators: true }
           );
@@ -63,7 +65,11 @@ const resolvers = {
       if (context.user) {
         const updatedUserProfile = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { bookId } },
+          {
+            $pull: {
+              savedBooks: { bookId }
+            }
+          },
           { new: true }
         );
 
