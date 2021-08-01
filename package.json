@@ -17,5 +17,8 @@
   },
   "dependencies": {
     "graphql": "^15.5.1"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }
