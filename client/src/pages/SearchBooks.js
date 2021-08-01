@@ -67,11 +67,12 @@ const SearchBooks = () => {
     }
 
     try {
-      const response = await saveBook(bookToSave, token);
+      // const response = await saveBook(bookToSave, token);
 
-      if (!response.ok) {
-        throw new Error('Something went wrong!');
-      }
+      // if (!response.ok) {
+      //   throw new Error('Something went wrong!');
+      // }
+      
       // Adding code to execute asynchronous mutation function returned by `useMutation()` hook and pass in `variables` object
       const {data} = await saveBook({ 
         variables: {
