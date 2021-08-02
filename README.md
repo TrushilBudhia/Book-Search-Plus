@@ -14,7 +14,7 @@
 [![Langugage: HTML5](https://img.shields.io/badge/Language-HTML5-yellow.svg)](https://developer.mozilla.org/en-US/docs/Glossary/HTML5)
 [![Langugage: CSS3](https://img.shields.io/badge/Language-CSS3-informational.svg)](https://developer.mozilla.org/en-US/docs/Web/CSS)
 [![Module: JSON Web Token](https://img.shields.io/badge/Module-Jsonwebtoken-critical.svg)](https://www.npmjs.com/package/jsonwebtoken)
-[![CSS Framework: Bootstrap](https://img.shields.io/badge/CSS-Bootstrap-9cf.svg)](https://getbootstrap.com/)
+[![CSS Framework: React-Bootstrap](https://img.shields.io/badge/CSS-ReactBootstrap-9cf.svg)](https://getbootstrap.com/)
 
 ## Description
 
@@ -44,7 +44,7 @@ If you wish to install the repository on your local machine, please follow the b
     ```js
     npm install
     ```
-    
+
 ## Usage
 An account can be creted with the signup button and once logged in, the user can search for books and save book results to their profile.
 
