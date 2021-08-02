@@ -14,7 +14,6 @@ const SavedBooks = () => {
   const { loading, data } = useQuery(GET_ME);
   const userData = data?.me || {};
 
-
   // Create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -52,7 +51,8 @@ const SavedBooks = () => {
       console.error(err);
     }
   };
-
+  console.log('data', data)
+  console.log('userData', userData)
   // If data isn't here yet, say so
   if (loading) {
     return <h2>LOADING...</h2>;
@@ -80,7 +80,8 @@ const SavedBooks = () => {
                   <Card.Title>{book.title}</Card.Title>
                   <p className='small'>Authors: {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
-                  <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
+                  <Card.Link href={book.link}>Visit Google Books</Card.Link>
+                  <Button className='btn-block btn-danger mt-2' onClick={() => handleDeleteBook(book.bookId)}>
                     Delete this Book!
                   </Button>
                 </Card.Body>
