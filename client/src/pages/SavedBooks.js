@@ -6,15 +6,15 @@ import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
 import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
+import '../styles/style.css'
 
 const SavedBooks = () => {
   // Setting up useMutation
   const [removeBook, { error }] = useMutation(REMOVE_BOOK);
   // Setting up useQuery
   const { loading, data } = useQuery(GET_ME);
-  console.log('data', data)
   const userData = data?.me || {};
-  console.log('userData', userData)
+
   // Create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -39,8 +39,7 @@ const SavedBooks = () => {
       console.error(err);
     }
   };
-  console.log('data', data)
-  console.log('userData', userData)
+
   // If data isn't here yet, say so
   if (loading) {
     return <h2>LOADING...</h2>;
@@ -48,7 +47,7 @@ const SavedBooks = () => {
 
   return (
     <>
-      <Jumbotron fluid className='text-light bg-dark'>
+      <Jumbotron fluid className='text-light bg-navy'>
         <Container>
           <h1>Viewing saved books!</h1>
         </Container>

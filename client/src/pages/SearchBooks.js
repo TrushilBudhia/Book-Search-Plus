@@ -6,6 +6,7 @@ import { searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 import { useMutation } from '@apollo/client';
 import { SAVE_BOOK } from '../utils/mutations';
+import '../styles/style.css'
 
 const SearchBooks = () => {
   // Create state for holding returned google api data
@@ -33,13 +34,11 @@ const SearchBooks = () => {
 
     try {
       const response = await searchGoogleBooks(searchInput);
-      console.log('responses', response);
       if (!response.ok) {
         throw new Error('Something went wrong!');
       }
 
       const { items } = await response.json();
-      console.log('items', items);
 
       const bookData = items.map((book) => ({
         bookId: book.id,
@@ -49,8 +48,6 @@ const SearchBooks = () => {
         image: book.volumeInfo.imageLinks?.thumbnail || '',
         link: book.volumeInfo.infoLink
       }));
-
-      console.log('bookData', bookData);
     
       setSearchedBooks(bookData);
       setSearchInput('');
@@ -61,10 +58,8 @@ const SearchBooks = () => {
 
   // Create function to handle saving a book to our database
   const handleSaveBook = async (bookId) => {
-    console.log('bookId', bookId);
     // Find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
-    console.log('bookToSave', bookToSave);
     // Get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -94,7 +89,7 @@ const SearchBooks = () => {
 
   return (
     <>
-      <Jumbotron fluid className='text-light bg-dark'>
+      <Jumbotron fluid className='text-light bg-navy'>
         <Container>
           <h1>Search for Books!</h1>
           <Form onSubmit={handleFormSubmit}>
