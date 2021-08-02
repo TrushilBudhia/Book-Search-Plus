@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
-import { useMutation } from '@apollo/client';
+
 import Auth from '../utils/auth';
 import { searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
+import { useMutation } from '@apollo/client';
 import { SAVE_BOOK } from '../utils/mutations';
 
 const SearchBooks = () => {
-  // Adding code to set up mutation
-  const [saveBook, { error }] = useMutation(SAVE_BOOK);
   // Create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
   // Create state for holding our search field data
   const [searchInput, setSearchInput] = useState('');
-
   // Create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
+  // Adding code to set up mutation
+  const [saveBook, { error }] = useMutation(SAVE_BOOK);
+
   // Set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
   // Learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
@@ -67,9 +68,9 @@ const SearchBooks = () => {
 
     try {    
       // Adding code to execute asynchronous mutation function returned by `useMutation()` hook and pass in `variables` object
-      const {data} = await saveBook({ 
+      const data = await saveBook({ 
         variables: {
-          input: bookToSave
+          input: { ...bookToSave }
         }
       });
       console.log('data', data)
