@@ -26,19 +26,6 @@ const SavedBooks = () => {
     try {
       const {data} = await removeBook({ 
         variables: { bookId }
-      },
-      {
-        // Removing the deleted book from cache
-        update: cache => {
-          const data = cache.readQuery({ query: GET_ME })
-          const userProfileData = data.me
-          const savedCache = userProfileData.savedBooks
-          const updatedCache = savedCache.filter((bookItem) => bookItem.bookId !== bookId)
-          userProfileData.savedBooks = updatedCache
-          cache.writeQuery({ 
-            query: GET_ME, 
-            data: { data: { ...userProfileData.savedBooks } } })
-        }
       })
       console.log('data', data)
 
