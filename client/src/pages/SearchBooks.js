@@ -33,7 +33,7 @@ const SearchBooks = () => {
 
     try {
       const response = await searchGoogleBooks(searchInput);
-
+      console.log('responses', response);
       if (!response.ok) {
         throw new Error('Something went wrong!');
       }
@@ -50,6 +50,8 @@ const SearchBooks = () => {
         link: book.volumeInfo.infoLink
       }));
 
+      console.log('bookData', bookData);
+    
       setSearchedBooks(bookData);
       setSearchInput('');
     } catch (err) {
@@ -59,8 +61,10 @@ const SearchBooks = () => {
 
   // Create function to handle saving a book to our database
   const handleSaveBook = async (bookId) => {
+    console.log('bookId', bookId);
     // Find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
+    console.log('bookToSave', bookToSave);
     // Get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -86,6 +90,7 @@ const SearchBooks = () => {
       console.error(err);
     }
   };
+  console.log('savedBookIds', savedBookIds);
 
   return (
     <>
