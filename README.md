@@ -55,9 +55,9 @@ The following images shows the functionality of the application:
 
 ![Book Search Plus gif preview.](./assets/images/Book-Search-Plus-Preview.gif)
 
-![Book Search Plus image of home screen.](./assets/images/Book-Search-Plus-Preview.-1.png)
+![Book Search Plus image of home screen.](./assets/images/Book-Search-Plus-Preview-1.png)
 
-![Book Search Plus image of book results being displayed once searched.](./assets/images/Book-Search-Plus-Preview.-2.png)
+![Book Search Plus image of book results being displayed once searched.](./assets/images/Book-Search-Plus-Preview-2.png)
 
 ## Technologies
 - [React](https://reactjs.org/)
