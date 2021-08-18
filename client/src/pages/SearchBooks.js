@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
-
 import Auth from '../utils/auth';
 import { searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { SAVE_BOOK } from '../utils/mutations';
 import '../styles/style.css'
+import { GET_ME } from '../utils/queries';
 
 const SearchBooks = () => {
+
+  const { data } = useQuery(GET_ME);
+  const userData = data?.me || {};
+  console.log('userData', userData);
+
   // Create state for holding returned google api data
   const [searchedBooks, setSearchedBooks] = useState([]);
   // Create state for holding our search field data
@@ -60,6 +65,7 @@ const SearchBooks = () => {
   const handleSaveBook = async (bookId) => {
     // Find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
+    console.log('bookToSave',bookToSave);
     // Get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
